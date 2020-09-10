@@ -1,2 +1,3 @@
 # Test
-My first git repository
+My first git repository ......
+which is a demo repository
