@@ -1,0 +1,15 @@
+.navItem {
+    padding: 8px;
+    margin-left:25px;
+    border: none;
+    background-color: white;
+    font-size: 20px;
+  }
+
+  .navItem.selected {
+    border-bottom: 4px solid green;
+ }
+
+ .navItem:focus{
+    outline:none;
+  }

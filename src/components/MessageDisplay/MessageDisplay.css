@@ -1,0 +1,9 @@
+.message-display {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+}
+
+.message-display p {
+    margin-top: -10px;
+}

@@ -1,0 +1,34 @@
+.SendMessage{
+    display:flex;
+    flex-direction: column;
+}
+
+.SendMessage input[type=submit] {
+    width: 6em; 
+    height: 2em;
+    margin-left: 130px;
+}
+
+.SendMessage div {
+    margin-bottom: 10px;
+}
+
+.SendMessage div .SM-Input {
+    margin-left: 20px;
+    width: 200px;
+}
+
+.SendMessage div .SM-Textarea {
+    margin-left: 4px;
+    width: 200px;
+    vertical-align: top;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.ok-button {
+    margin-left: 70px;
+}
