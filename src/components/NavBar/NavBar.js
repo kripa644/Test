@@ -1,48 +1,43 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
+import React, {useEffect, useRef, useState} from 'react';
+import { NavLink } from 'react-router-dom'
+import { useGlobalContext } from '../context';
 import styles from './NavBar.module.css';
-import {useGlobalContext} from '../context';
 
 const NavBar = props => {
-    const {selectedNavItem, setSelectedNavItem} = useGlobalContext();
+    const {showLinks} = useGlobalContext();
     const displayTime = () => {
         var d = new Date(),
         minutes = d.getMinutes().toString().length == 1 ? '0'+d.getMinutes() : d.getMinutes(),
         hours = d.getHours().toString().length == 1 ? '0'+d.getHours() : d.getHours(),
-        ampm = d.getHours() >= 12 ? 'pm' : 'am',
+        ampm = d.getHours() >= 12 ? 'PM' : 'AM',
         months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
         days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-        return days[d.getDay()]+' '+months[d.getMonth()]+' '+d.getDate()+' '+d.getFullYear()+' '+hours+':'+minutes+ampm;
+        return [(days[d.getDay()]+', '+months[d.getMonth()]+' '+d.getDate()+' '+d.getFullYear()), (hours+':'+minutes+ ' '+ampm)];
     };
 
-    const navItemClass1 = `${styles.navItem} ${selectedNavItem === 0 ? styles.show : undefined}`;
-    const navItemClass2 = `${styles.navItem} ${selectedNavItem === 1 ? styles.show : undefined}`;
-    const navItemClass3 = `${styles.navItem} ${selectedNavItem === 2 ? styles.show : undefined}`;
-    console.log(selectedNavItem);
     return (
-        <div className={styles.navContainer}>
+        <>
+        {<div className={styles.navContainer}>
             
             <nav className={styles.navbar}>
                 <div className={styles.navCenter}>
                     <ul className={styles.navLinks}>
                     <li>
-                        <Link to='/' className={navItemClass1} onClick={() => {
-                            setSelectedNavItem(0);
-                            console.log(selectedNavItem);
-                        }}>Home</Link>
+                        <NavLink exact activeClassName={styles.selected} to="/" className={styles.navItem} >Home</NavLink>
                     </li>
                     <li>
-                        <Link to='favorites' className={navItemClass2} onClick={() => setSelectedNavItem(1)}>Favourite</Link>
+                        <NavLink activeClassName={styles.selected} to="/favorites" className={styles.navItem}>Favourite</NavLink>
                     </li>
                     <li>
-                        <Link to='/recent' className={navItemClass3} onClick={() => setSelectedNavItem(2)}>Recent Search</Link>
+                        <NavLink activeClassName={styles.selected} to="/recent" className={styles.navItem}>Recent Search</NavLink>
                     </li>
                     </ul>
                 </div>
             </nav>
 
-            <div className={styles.date}>{displayTime()}</div>
-        </div>
+            <div className={styles.date}>{displayTime()[0]}<span>{displayTime()[1]}</span></div>
+        </div>}
+        </>
     );
 };
 

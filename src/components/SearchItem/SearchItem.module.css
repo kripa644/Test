@@ -2,6 +2,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    /* border: 1px solid red; */
+    
 }
 
 .SearchItem {
@@ -10,24 +13,23 @@
     justify-content: space-between;
     margin: 20px 0px;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     color: #fff;
+    box-sizing: border-box;
+    /* border: 1px solid blue; */
 }
 
-.serchField {
-    position: relative;
-}
 
 .searchIcon {
-    position: absolute;
-    top: 40px;
-    right: 180px;
+    /* position: absolute;
+    top: 43px;
+    right: 180px; */
+    margin-left: -40px;
+    margin-top: 15px;
     background: transparent;
     border: none;
     font-size: 20px;
     color: #fff;
+    height: 30px;
 }
 
 .logo {
@@ -35,10 +37,20 @@
     height: 30px;
 }
 
+form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* border: 4px solid green; */
+    /* margin-left: -10px; */
+    width: 458px;
+
+}
+
 .searchCity {
     box-sizing: border-box;
     Height: 45px;
-    Width: 458px;
+    Width: 100%;
     background-color: rgba(255, 255, 255, 0.2);
     /* opacity: 30%; */
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -51,9 +63,44 @@
 
 input:focus {
     outline: none;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.4);
 }
 
 ::placeholder { 
     color: rgba(255, 255, 255, 0.5);
+}
+
+@media(max-width: 767px) {
+    .logo {
+        display: none;
+    }
+
+    .navContainer {
+        width: 100%; 
+    }
+
+    .SearchItem {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .searchField {
+        position: relative;
+        width: 100%;
+    }
+
+    .searchField form {
+        width: 100%;
+    }
+
+    .searchCity {
+        width: 100%;
+    }
+
+    .searchIcon {
+        position: absolute;
+        right: 18px;
+    }
 }

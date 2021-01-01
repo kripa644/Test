@@ -25,8 +25,13 @@
     font-size: 15px;
     line-height: 15px;
     text-transform: uppercase;
-    margin-right: 40px;
+    padding: 10px;
+    margin-right: 35px;
     /* transition: all 0.5s linear; */
+}
+
+.navItem:first-child {
+    margin-left: -10px;
 }
 
 .navItem:hover {
@@ -35,7 +40,7 @@
     padding-bottom: 5px;
 }
 
-.navItem.show {
+.selected {
     color: #FFD639;
     border-bottom: 2px solid #FFD639;
     padding-bottom: 5px;
@@ -44,4 +49,58 @@
 .date {
     font-size: 15px;
     color: #fff;
+}
+
+.date span {
+    margin-left: 12px;
+}
+
+@media(max-width: 767px) {
+
+    .navContainer {
+        margin-top: 0px;
+        /* height: 100px; */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        /* border: 1px solid green; */
+    }
+
+    .date {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .showNavBar {
+        width: 100%;
+        /* border: 1px solid green; */
+        display: flex;
+        flex-direction: column;
+    }
+    .navCenter {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        /* border: 3px solid red; */
+        
+    }
+
+    .navCenter .navLinks {
+        /* border: 3px solid red; */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .navItem {
+        /* border: 1px solid black; */
+        width: 30%;
+        padding: 0 7px 5px 7px;
+        margin: 0;
+        /* height: auto; */
+    }
+    .navItem:first-child {
+        margin: 0;
+    }
 }

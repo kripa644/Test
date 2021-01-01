@@ -6,6 +6,11 @@ import { useGlobalContext } from '../components/context';
 const Home = () => {
     const {weather, loading} = useGlobalContext();
     // console.log(WeatherData);
+
+    if(loading) {
+        return <h1>Loading...</h1>
+    }
+
     return (
         <div>
             {/* {weather.data === '' || weather.data.cod !== '404' ?  <WeatherData/> : <h1>Failed to fetch the weather details of requested city</h1>} */}

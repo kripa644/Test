@@ -8,7 +8,8 @@
     justify-content: space-between;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
+    margin-bottom: 2px;
     color: #fff;
     padding: 5px 20px;
     padding-right: 30px;
@@ -20,35 +21,51 @@
 }
 
 .FavouriteItem:hover .cityName {
-    color: #FFE539;
+    color: #FFD639;
 }
 
 .cityName {
     font-size: 16px;  
-    width: 20%;
+    width: 15%;
 }
 
 .tempData {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 25%;
-    margin-left: -60px;
+    /* justify-content: center; */
+    width: 30%;
+    padding: 8px;
+    /* margin-left: -70px; */
     /* border: 1px solid red; */
 }
 
+.image {
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    /* border: 1px solid black; */
+}
 
 .tempValue {
     font-size: 32px;
+    margin-left: 35px;
+    width: 70px;
+    display: flex;
+    align-items: center;
+    /* border: 1px solid black; */
 }
 
 
 .tempValue span {
     font-size: 16px;
+    margin-top: 8px;
+    margin-left: 5px;
 }
 
 .tempInfo {
     font-size: 18px;
+    margin-left: 25px;
+    /* border: 1px solid black; */
 }
 
 .favIcon {
@@ -56,9 +73,44 @@
 }
 
 .fav {
-    color: #FFE539;
+    color: #FFD639;
 }
 
 .notFav {
     color: #fff;
+}
+
+@media(max-width: 767px) {
+
+    .tempData {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        /* margin-left: 8px; */
+        align-items: center;
+        justify-content: center;
+        /* border: 1px solid red; */
+    }
+
+    .image, .tempInfo, .tempValue {
+        margin: 0;
+        text-align: center;
+    }
+
+    .tempValue {
+        margin-top: -5px;
+    }
+
+    .tempInfo {
+        margin-top: 5px;
+    }
+
+}
+
+@media (max-width:1024px) and (min-width: 768px) {
+    .tempData {
+        width: 49%;
+        /* border: 1px solid red; */
+    }
 }

@@ -6,7 +6,7 @@ import Modal from '../components/Modal/Modal';
 import FavouriteItem from '../components/FavouriteItem/FavouriteItem';
 
 const Favorites = () => {
-  const {recentItems, setRecentItems} = useGlobalContext();
+  const {recentItems, setRecentItems, fetchWeatherData, weather} = useGlobalContext();
   const [show, setShow] = useState(false)
 
   const closeModal = () => {
@@ -26,7 +26,7 @@ const Favorites = () => {
       return {...item, isFavorite: false};
     });
     setRecentItems(newFavItems);
-    console.log(recentItems);
+
     // setFavorites([]);
   }
 
@@ -36,7 +36,7 @@ const Favorites = () => {
       <div className='favoriteCities'>
         <div className='favoriteHeader'>
           <div className='favTitle'>
-            {favoriteItems.length} City added as favorite
+            {favoriteItems.length} <span>{favoriteItems.length > 1 ? 'Cities' : 'City'}</span> added as favorite
           </div>
           <button className='remove' onClick={() => setShow(true)}>Remove All</button>
         </div>

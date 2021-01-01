@@ -1,4 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import {useLocalStorageState} from './useLocalStorageState';
+import {useSessionStorageState} from './useSessionStorageState';
 
 const api = {
     key: 'eba3ee12c3c0d28e4314be09645d4d8b',
@@ -11,29 +14,42 @@ const AppContext = React.createContext();
 
 const AppProvider = ({children}) => {
 
-    const [selectedNavItem, setSelectedNavItem] = useState(0);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [weather, setWeather] = useState({data: ''});
-    const [loading, setLoading] = useState(false);
-    const [recentItems, setRecentItems] = useState([]);
+    let history = useHistory();
 
-    const prevent = () => {
-        return true;
+    const [searchTerm, setSearchTerm] = useState('');
+    const [weather, setWeather] = useSessionStorageState({data: ''}, 'weatherData');
+    const [loading, setLoading] = useState(false);
+    const [recentItems, setRecentItems] = useLocalStorageState([], 'recentItems');
+    const [isCelcius, setIsCelcius] = useLocalStorageState(false, 'isCelcius');
+    const [showLinks, setShowLinks] = useState();
+
+    const addToFavorite = (cityName) => {
+        const newRecentList = recentItems.map((item) => {
+            if(item.city === cityName) {
+                const newItem = {...item, isFavorite: true};
+                return newItem;
+            }
+            return item;
+        });
+        setRecentItems(newRecentList);
+    
     }
 
     const fetchWeatherData = async (e, city) => {
             e.preventDefault();
+            // setWeather({data: ''});
             setLoading(true);
             setSearchTerm(city);
             const searchValue = city || searchTerm;
             const data = await fetch(`${api.url}q=${searchValue}&units=imperial&appid=${api.key}`
             ).then((res) => res.json())
             .then(data => data);
+            // console.log(data);
             setWeather({data: data});
             setSearchTerm('');
             setLoading(false);
             console.log(data);
-            
+        
             const element = recentItems.find((item) => item.city === data.name);
             if(element) {
                 // setRecentItems(recentItems.concat({...element, isRecent: true}));
@@ -48,31 +64,26 @@ const AppProvider = ({children}) => {
                 return;
             }
             if(data.cod !== '404') {
-                const newData = {city: data.name, 
-                            icon: data.weather[0].icon, 
-                            temp: Math.round((data.main.temp - 32) / 1.8), 
-                            info: data.weather[0].description, 
-                            isFavorite: false,
-                            isRecent: true
-                };
+                const newData = {city: data.name,
+                                country: data.sys.country, 
+                                icon: data.weather[0].icon, 
+                                temp: data.main.temp, 
+                                info: data.weather[0].description,
+                                min: data.main.temp_min,
+                                max: data.main.temp_max,
+                                precipitation: data.rain ? data.rain['1h'] : (data.snow ? data.snow['1h'] : '0'),
+                                humidity: data.main.humidity,
+                                wind: data.wind.speed,
+                                visibility: data.visibility,
+                                isFavorite: false,
+                                isRecent: true,
+                                celcius: isCelcius
+                                };
                 setRecentItems(recentItems.concat(newData));
             }
 
-            // addToRecent(weather.data.name);
-
-    };
-
-    const addToFavorite = (cityName) => {
-        const newRecentList = recentItems.map((item) => {
-            if(item.city === cityName) {
-                const newItem = {...item, isFavorite: true};
-                return newItem;
-            }
-            return item;
-        });
-        setRecentItems(newRecentList);
-    
-    }
+        };
+  
 
 
     return <AppContext.Provider 
@@ -82,11 +93,14 @@ const AppProvider = ({children}) => {
                 setSearchTerm,
                 loading,
                 weather,
-                selectedNavItem,
-                setSelectedNavItem,
+                setWeather,
                 addToFavorite,
                 recentItems,
-                setRecentItems
+                setRecentItems,
+                isCelcius,
+                setIsCelcius,
+                showLinks,
+                setShowLinks
             }}
           >
             {children}

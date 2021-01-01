@@ -1,4 +1,4 @@
-h2 {
+h2, h1 {
     color: #fff;
     margin: auto;
     text-align: center;
@@ -59,11 +59,12 @@ h2 {
 }
 
 .noFavorite {
-    margin-top: 120px;
+    margin-top: 200px;
 }
 
 .noFavoriteText {
     color: #fff;
     font-size: 18px;
     margin-top:  20px;
+    margin-left: 15px;
 }
